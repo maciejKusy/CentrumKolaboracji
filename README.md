@@ -1,2 +1,4 @@
 # CentrumKolaboracji
-Rp for the collaboration of Boczek and Pacin
+Trying to cause conflict again.
+
+Repo for B&C collab.
