@@ -1,2 +1,2 @@
-# Collaboration center
-Repo for Boczek and Pacin collaboriation
+# CentrumKolaboracji
+Rp for the collaboration of Boczek and Pacin
