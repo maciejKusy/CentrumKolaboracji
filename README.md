@@ -1,2 +1,2 @@
 # CentrumKolaboracji
-Rp dla kolaboracji Boczka i Pacina
+Rp for the collaboration of Boczek and Pacin
