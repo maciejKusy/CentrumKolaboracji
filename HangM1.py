@@ -33,11 +33,13 @@ def guessword():
         if ans == secretword[n]:                        # located in the secret word and to put it at analogous
           guesses[n] = str(ans)                         # index in quesses: we want to show the player their
           print("Yes! You got one. \n")                 # partial answer
-          print(guesses)
+          partial = "".join([x for x in guesses])       # turning list into string for printing of partial answer
+          print(partial)
     else:
       counter += 1                                      # if answer is neither the secret word nor a part of it
       print("Nope, try again. \n")                      # counter + 1 and message
-      print(guesses)
+      partial = "".join([x for x in guesses])           # turning list into string for printing of partial answer
+      print(partial)
     if counter >= max_counter:                          # loop termination if counter reaches limit
       print("No more tries. Better luck next time.\n")
       break
