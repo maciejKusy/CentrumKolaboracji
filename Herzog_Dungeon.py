@@ -1,6 +1,9 @@
 import random
+
+all_possible_coordinates = [(2,2),(2,1),(1,2),(3,2),(2,3),(2,4)]
 x_axis_coordinate = 2
 y_axis_coordinate = 2
+current_position = (x_axis_coordinate,y_axis_coordinate)
 herzog_defeated = False
 videotape_found = False
 sadness_induced = False
@@ -20,7 +23,7 @@ def TV_selection():
 
 def hall_room():
   print("This is the hall. Nothing here but four doors... That\'s weird.\n\n")  
-  relocate_NESW()
+  relocate()
 
 
 def videotape_room():
@@ -47,7 +50,7 @@ You put it in your inventory as it dawns on you thins might come in handy at som
       else:
         print("You find nothing of interest. Only broken dreams...\n\n")
     elif answer == "c":
-      relocate_E()
+      relocate()
       break
 
 
@@ -73,7 +76,7 @@ this trend ended many years ago fortunately.\n\n""")
       else:
         print("You\'re already bummed out and depressed, nothing more to gain, nothing to lose..\n\n")
     elif answer == "b":
-      relocate_N()
+      relocate()
       break
 
 
@@ -94,7 +97,7 @@ Press B to exit the room.\n\n""")).lower()
       else:
         print("You already got the key, get out.\n\n")
     elif answer == "b":
-      relocate_W()
+      relocate()
       break
 
 
@@ -136,7 +139,7 @@ turn his attention away from spewing random quotes of himself. If only you had s
           print("""You posess neither the appropriate mindset nor the items necessary to defeat 
 HERZOG. Come back when you do.\n\n""")
       else:
-        relocate_S()
+        relocate()
         break
   else:
     print("""The room is dark and shrouded with cigarette smoke but the HERZOG inside seems docile and only mutters quietly: \n\n"""+herzog_random_quote())    
@@ -147,7 +150,7 @@ Press A to exit the room;
       if answer != "a":
         print("Sorry, wrong input.\n\n")
       else:
-        relocate_NS()
+        relocate()
         break
 
 
@@ -170,20 +173,27 @@ Press B to go back.\n\n""")).lower()
       else:
         print("The exit is locked.\n\n")
     elif answer == "b":
-      relocate_S()
+      relocate()
       break
 
-
-def relocate_NESW():
+def relocate():
   global y_axis_coordinate
   global x_axis_coordinate
-  choices = ["n","s","w","e"]
-  direction = (input("""Where do you want to go?
-Press N to go north;
-Press E to go east;
-Press S to go south;
-Press W to go west;\n\n""")).lower()
+  choices = []
+  if (x_axis_coordinate + 1, y_axis_coordinate) in all_possible_coordinates:
+    choices.append("e")
+    print("Press 'E' to go east;")
+  if (x_axis_coordinate - 1, y_axis_coordinate) in all_possible_coordinates:
+    choices.append("w")
+    print("Press 'W' to go west;")
+  if (x_axis_coordinate, y_axis_coordinate + 1) in all_possible_coordinates:
+    choices.append("n")
+    print("Press 'N' to go north;")
+  if (x_axis_coordinate, y_axis_coordinate - 1) in all_possible_coordinates:
+    choices.append("s")
+    print("Press 'S' to go south;")  
   while True:
+    direction = (input("Select direction:\n")).lower()
     if direction == "n":
       y_axis_coordinate += 1
       break
@@ -196,102 +206,6 @@ Press W to go west;\n\n""")).lower()
     elif direction == "w":
       x_axis_coordinate -= 1
       break
-    elif direction not in choices:
-      print("Sorry, wrong input.\n\n")
-
-
-def relocate_NESW():
-  global y_axis_coordinate
-  global x_axis_coordinate
-  choices = ["n","s","w","e"]
-  direction = (input("""Where do you want to go?
-Press N to go north;
-Press E to go east;
-Press S to go south;
-Press W to go west;\n\n""")).lower()
-  while True:
-    if direction == "n":
-      y_axis_coordinate += 1
-      break
-    elif direction == "e":
-      x_axis_coordinate += 1
-      break
-    elif direction == "s":
-      y_axis_coordinate -= 1
-      break
-    elif direction == "w":
-      x_axis_coordinate -= 1
-      break
-    elif direction not in choices:
-      print("Sorry, wrong input.\n\n")
-
-
-def relocate_N():
-  global y_axis_coordinate 
-  direction = (input("""Where do you want to go?
-Press N to go north;\n\n
-""")).lower()
-  while True:
-    if direction == "n":
-      y_axis_coordinate += 1
-      break
-    else:
-      print("Sorry, wrong input.\n\n")
-  
-
-def relocate_S():
-  global y_axis_coordinate
-  direction = (input("""Where do you want to go?
-Press S to go south;\n\n
-""")).lower()
-  while True:
-    if direction == "s":
-      y_axis_coordinate -= 1
-      break
-    else:
-      print("Sorry, wrong input.\n\n")
-
-
-def relocate_E():
-  global x_axis_coordinate
-  direction = (input("""Where do you want to go?
-Press E to go east;\n\n
-""")).lower()
-  while True:
-    if direction == "e":
-      x_axis_coordinate += 1
-      break
-    else:
-      print("Sorry, wrong input.\n\n")
-
-
-def relocate_W():
-  global x_axis_coordinate
-  direction = (input("""Where do you want to go?
-Press W to go west;\n\n
-""")).lower()
-  while True:
-    if direction == "w":
-      x_axis_coordinate -= 1
-      break
-    else:
-      print("Sorry, wrong input.\n\n")
-
-
-def relocate_NS():
-  global y_axis_coordinate
-  choices = ["n","s"]
-  direction = (input("""Where do you want to go?
-Press N to go north;
-Press S to go south;
-\n\n""")).lower()
-  while True:
-    if direction == "n":
-      y_axis_coordinate += 1
-      break
-    elif direction == "s":
-      y_axis_coordinate -= 1
-      break   
     elif direction not in choices:
       print("Sorry, wrong input.\n\n")
 
@@ -299,19 +213,21 @@ def the_game():
   input("Welcome to the dungeon. Press ENTER to dive head-first into madness...")
   global exit_open
   while exit_open == False:
-    if x_axis_coordinate == 2 and y_axis_coordinate == 2:
+    current_position = (x_axis_coordinate,y_axis_coordinate)   
+    if current_position == (2,2):
       hall_room()
-    elif x_axis_coordinate == 2 and y_axis_coordinate == 1:
+    elif current_position == (2,1):
       sadness_room()
-    elif x_axis_coordinate == 1 and y_axis_coordinate == 2:
+    elif current_position == (1,2):
       videotape_room()
-    elif x_axis_coordinate == 3 and y_axis_coordinate == 2:
+    elif current_position == (3,2):
       key_room()
-    elif x_axis_coordinate == 2 and y_axis_coordinate == 3:
+    elif current_position == (2,3):
       herzog_room()
-    elif x_axis_coordinate == 2 and y_axis_coordinate == 4:
+    elif current_position == (2,4):
       exit_room()
 
   input("Press ENTER to quit.")
 
 the_game()
+    
