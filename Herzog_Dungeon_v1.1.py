@@ -3,30 +3,17 @@ import HerzDungDicts
 
 all_possible_coordinates = [(2, 2), (2, 1), (1, 2), (3, 2), (2, 3)]
 
-player = {
-    "position": {
-        "x_axis": 2,
-        "y_axis": 2
-    },
-    "herzog_defeated": False,
-    "videotape_found": False,
-    "sadness_induced": False,
-    "key_found": False,
-    "exit_open": False
-}
-
 
 def display_incorrect_input():
     print("Sorry, wrong input.\n\n")
 
 
-def hall_room():
+def hall_room(player):
     print("This is the hall. Nothing here but four doors... That\'s weird.\n\n")
-    relocate()
+    return relocate(player)
 
 
-def videotape_room():
-    global player
+def videotape_room(player):
     print(HerzDungDicts.rooms["videotape_room"]["intro"])
     choices = HerzDungDicts.rooms["videotape_room"]["choices"]
     while True:
@@ -37,18 +24,16 @@ def videotape_room():
             print(HerzDungDicts.rooms["videotape_room"]["action_messages"]["watching_tv"] +
                   random.choice(list(HerzDungDicts.tv_programmes.values())))
         elif answer == "b":
-            if player["videotape_found"] is False:
-                player["videotape_found"] = True
+            if not player["has_found_videotape"]:
+                player["has_found_videotape"] = True
                 print(HerzDungDicts.rooms["videotape_room"]["action_messages"]["first_search"])
             else:
                 print(HerzDungDicts.rooms["videotape_room"]["action_messages"]["further_searches"])
         elif answer == "c":
-            relocate()
-            break
+            return relocate(player)
 
 
-def sadness_room():
-    global player
+def sadness_room(player):
     print(HerzDungDicts.rooms["sadness_room"]["intro"])
     choices = HerzDungDicts.rooms["sadness_room"]["choices"]
     while True:
@@ -56,18 +41,16 @@ def sadness_room():
         if answer not in choices:
             display_incorrect_input()
         elif answer == "a":
-            if player["sadness_induced"] is False:
-                player["sadness_induced"] = True
+            if not player["has_induced_sadness"]:
+                player["has_induced_sadness"] = True
                 print(HerzDungDicts.rooms["sadness_room"]["action_messages"]["first_sadness"])
             else:
                 print(HerzDungDicts.rooms["sadness_room"]["action_messages"]["further_sadness"])
         elif answer == "b":
-            relocate()
-            break
+            return relocate(player)
 
 
-def key_room():
-    global player
+def key_room(player):
     print(HerzDungDicts.rooms["key_room"]["intro"])
     choices = HerzDungDicts.rooms["key_room"]["choices"]
     while True:
@@ -75,20 +58,18 @@ def key_room():
         if answer not in choices:
             display_incorrect_input()
         elif answer == "a":
-            if player["key_found"] is False:
-                player["key_found"] = True
+            if not player["has_found_key"]:
+                player["has_found_key"] = True
                 print(HerzDungDicts.rooms["key_room"]["action_messages"]["first_key_search"])
             else:
                 print(HerzDungDicts.rooms["key_room"]["action_messages"]["further_key_search"])
         elif answer == "b":
-            relocate()
-            break
+            return relocate(player)
 
 
-def herzog_room():
-    global player
+def herzog_room(player):
     global all_possible_coordinates
-    if player["herzog_defeated"] is False:
+    if not player["has_defeated_herzog"]:
         input(HerzDungDicts.rooms["herzog_room"]["intro_pre_defeat1"])
         input(HerzDungDicts.rooms["herzog_room"]["intro_pre_defeat2"])
         input(HerzDungDicts.rooms["herzog_room"]["intro_pre_defeat3"])
@@ -101,20 +82,19 @@ def herzog_room():
             elif answer == "a":
                 print(HerzDungDicts.rooms["herzog_room"]["action_messages"]["attack"])
             elif answer == "b":
-                if player["videotape_found"] is True and player["sadness_induced"] is True:
+                if player["has_found_videotape"] and player["has_induced_sadness"]:
                     all_possible_coordinates.append((2, 4))
-                    player["herzog_defeated"] = True
+                    player["has_defeated_herzog"] = True
                     print(HerzDungDicts.rooms["herzog_room"]["action_messages"]["smart_defeat"])
-                    break
-                elif player["videotape_found"] is True:
+                    return player
+                elif player["has_found_videotape"]:
                     print(HerzDungDicts.rooms["herzog_room"]["action_messages"]["videotape_only"])
-                elif player["sadness_induced"] is True:
+                elif player["has_induced_sadness"]:
                     print(HerzDungDicts.rooms["herzog_room"]["action_messages"]["sadness_only"])
                 else:
                     print(HerzDungDicts.rooms["herzog_room"]["action_messages"]["unprepared"])
             else:
-                relocate()
-                break
+                return relocate(player)
     else:
         print(HerzDungDicts.rooms["herzog_room"]["intro_post_defeat"])
         while True:
@@ -122,12 +102,10 @@ def herzog_room():
             if answer != "a":
                 display_incorrect_input()
             else:
-                relocate()
-                break
+                return relocate(player)
 
 
-def exit_room():
-    global player
+def exit_room(player):
     print(HerzDungDicts.rooms["exit_room"]["intro"])
     choices = HerzDungDicts.rooms["exit_room"]["choices"]
     while True:
@@ -135,68 +113,93 @@ def exit_room():
         if answer not in choices:
             display_incorrect_input()
         elif answer == "a":
-            if player["key_found"] is True:
-                player["exit_open"] = True
+            if player["has_found_key"]:
+                player["is_ready_to_leave"] = True
                 print(HerzDungDicts.rooms["exit_room"]["action_messages"]["key_found"])
-                break
+                return player
             else:
                 print(HerzDungDicts.rooms["exit_room"]["action_messages"]["key_not_found"])
         elif answer == "b":
-            relocate()
-            break
+            return relocate(player)
 
 
-def relocate():
-    global player
+def find_possible_moves(player):
+    return True
+
+
+def relocate(player):
     choices = []
-    if (player["position"]["x_axis"] + 1, player["position"]["y_axis"]) in all_possible_coordinates:
+    if get_position(player, 1) in all_possible_coordinates:
         choices.append("e")
         print("Press 'E' to go east;")
-    if (player["position"]["x_axis"] - 1, player["position"]["y_axis"]) in all_possible_coordinates:
+    if get_position(player, -1) in all_possible_coordinates:
         choices.append("w")
         print("Press 'W' to go west;")
-    if (player["position"]["x_axis"], player["position"]["y_axis"] + 1) in all_possible_coordinates:
+    if get_position(player, 0, 1) in all_possible_coordinates:
         choices.append("n")
         print("Press 'N' to go north;")
-    if (player["position"]["x_axis"], player["position"]["y_axis"] - 1) in all_possible_coordinates:
+    if get_position(player, 0, -1) in all_possible_coordinates:
         choices.append("s")
         print("Press 'S' to go south;")
     while True:
         direction = (input("Select direction:\n")).lower()
-        if direction == "n":
+        if direction not in choices:
+            display_incorrect_input()
+            continue
+        elif direction == "n":
             player["position"]["y_axis"] = player["position"]["y_axis"] + 1
-            break
         elif direction == "e":
             player["position"]["x_axis"] = player["position"]["x_axis"] + 1
-            break
         elif direction == "s":
             player["position"]["y_axis"] = player["position"]["y_axis"] - 1
-            break
         elif direction == "w":
             player["position"]["x_axis"] = player["position"]["x_axis"] - 1
-            break
-        elif direction not in choices:
-            display_incorrect_input()
+
+        return player
+
+
+def prepare_rooms():
+    return {
+        (2, 2): hall_room,
+        (2, 1): sadness_room,
+        (1, 2): videotape_room,
+        (3, 2): key_room,
+        (2, 3): herzog_room,
+        (2, 4): exit_room
+    }
+
+
+def prepare_player():
+    return {
+        "position": {
+            "x_axis": 2,
+            "y_axis": 2
+        },
+        "has_defeated_herzog": False,
+        "has_found_videotape": False,
+        "has_induced_sadness": False,
+        "has_found_key": False,
+        "is_ready_to_leave": False
+    }
+
+
+def get_position(player, mod_x=0, mod_y=0):
+    return player["position"]["x_axis"] + mod_x, player["position"]["y_axis"] + mod_y
 
 
 def the_game():
     input("Welcome to the dungeon. Press ENTER to dive head-first into madness...")
-    global player
-    while player["exit_open"] is False:
-        current_position = (player["position"]["x_axis"], player["position"]["y_axis"])
-        if current_position == (2, 2):
-            hall_room()
-        elif current_position == (2, 1):
-            sadness_room()
-        elif current_position == (1, 2):
-            videotape_room()
-        elif current_position == (3, 2):
-            key_room()
-        elif current_position == (2, 3):
-            herzog_room()
-        elif current_position == (2, 4):
-            exit_room()
-    input("Press ENTER to quit.")
+    rooms = prepare_rooms()
+    player = prepare_player()
+    while not player["is_ready_to_leave"]:
+        current_position = get_position(player)
+        player = rooms[current_position](player)
+
+    choice = input("Type P to play again, or any other key to exit\n")
+    if choice == 'A':
+        the_game()
+    else:
+        print('The end')
 
 
 the_game()
