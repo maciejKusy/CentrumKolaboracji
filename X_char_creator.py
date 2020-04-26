@@ -1,3 +1,4 @@
+from X_gen_mechanics import wrong_input
 
 # available_classes = {
 #     'fighter': {
@@ -27,11 +28,6 @@
 available_sexes = ['male', 'female', 'transsexual']
 available_races = ['human', 'marxist', 'gypsy']
 available_skills = ["Science", "Hacking", "Electronics", "Fitness"]
-
-
-def wrong_input():
-    input("\nSorry, wrong input, press ENTER to try again.\n")
-
 
 # def set_parameter_from_input(parameter_name):
 #     choice = input("Enter your hero\'s " + parameter_name + ":\n").capitalize()
