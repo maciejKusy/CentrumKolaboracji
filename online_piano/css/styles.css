@@ -1,0 +1,138 @@
+body {
+  background-color: #0a0d0f;
+  height: 100%;
+  padding-top: 10em;
+}
+
+.shadow {
+  background-color: #1f252d;
+  width: 100%;
+  height: 10%;
+  position: absolute;
+  top: 110px;
+}
+
+.keyboard {
+  background-image: linear-gradient(#222831, #1f252d);
+  border-radius: 8px;
+  border: 3px outset #393e46;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  margin: 0 auto 0 auto;
+  width: 80%;
+  position: relative;
+}
+
+.key-line {
+  border: 3px inset #393e46;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 50%;
+  margin: auto auto 0 auto;
+  position: relative;
+}
+
+.sound {
+  color: transparent;
+  font-size: 0.001em;
+}
+
+.sound:hover {
+  cursor: pointer;
+}
+
+.white-key {
+  background-color: #eeeeee;
+  border: 2px outset grey;
+  border-radius: 2px 2px 6px 6px;
+  border-bottom: none;
+  height: 100%;
+  width: 5%;
+}
+
+.black-key {
+  background-image: linear-gradient(#313333, #0d0d0d);
+  border: 2px outset #333333;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  height: 70%;
+  width: 2%;
+  position: absolute;
+  top: -0.5%;
+}
+
+.black-key:hover {
+  cursor: pointer;
+}
+
+.b0 {
+  left: 3.60%;
+}
+
+.b1 {
+  left: 8.35%;
+}
+
+.b2 {
+  left: 17.85%;
+}
+
+.b3 {
+  left: 22.6%;
+}
+
+.b4 {
+  left: 27.53%;
+}
+
+.b5 {
+  left: 36.85%;
+}
+
+.b6 {
+  left: 41.6%;
+}
+
+.b7 {
+  left: 51.1%;
+}
+
+.b8 {
+  left: 55.85%;
+}
+
+.b9 {
+  left: 60.6%;
+}
+
+.b10 {
+  left: 70.1%;
+}
+
+.b11 {
+  left: 74.85%;
+}
+
+.b12 {
+  left: 84.35%;
+}
+
+.b13 {
+  left: 89.1%;
+}
+
+.b14 {
+  left: 93.85%;
+}
+
+.pressed-white {
+  background-image: linear-gradient(#eeeeee, #737373);
+}
+
+.pressed-black {
+  background-image: linear-gradient(#0d0d0d, #313333);
+}
