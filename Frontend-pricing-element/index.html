@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <title>Frontend Mentor | Pricing component with toggle</title>
+</head>
+
+<body>
+  <h1 class="page-heading">Our Pricing</h1>
+
+  <div class="toggle-button-container">
+    <span class="toggle-text">Annually</span>
+    <div class="toggle-button" tabindex="0">
+      <div class="toggle-button-circle">
+      </div>
+    </div>
+    <span class="toggle-text">Monthly</span>
+  </div>
+
+  <div class="half left">
+    <img class="background bottom" src="images/bg-bottom.svg" alt="bottom background image">
+  </div>
+  <div class="half right">
+    <img class="background top" src="images/bg-top.svg" alt="top background image">
+  </div>
+
+  <div class="pricecard-container">
+
+    <div class="basic-pricecard">
+      <h4 class="price-tag-name">Basic</h4>
+      <h1 id="basic-price" class="price-tag"><span class="dollar-sign">$ </span>199.99</h1>
+      <hr class="separator">
+      <h5 class="price-card-text">500 GB Storage</h5>
+      <hr class="separator">
+      <h5 class="price-card-text">2 Users Allowed</h5>
+      <hr class="separator">
+      <h5 class="price-card-text">Send up to 3 GB</h5>
+      <hr class="separator">
+      <button type="button" class="learn-more-button">LEARN MORE</button>
+    </div>
+
+    <div class="professional-pricecard">
+      <h4 class="price-tag-name professional professional-tag-name">Professional</h4>
+      <h1 id="professional-price" class="price-tag professional"><span class="dollar-sign">$ </span>249.99</h1></h1>
+      <hr class="separator">
+      <h5 class="price-card-text-professional">1 TB Storage</h5>
+      <hr class="separator">
+      <h5 class="price-card-text-professional">5 Users Allowed</h5>
+      <hr class="separator">
+      <h5 class="price-card-text-professional">Send up to 10 GB</h5>
+      <hr class="separator">
+      <button type="button" class="learn-more-button professional-button">LEARN MORE</button>
+    </div>
+
+    <div class="master-pricecard">
+      <h4 class="price-tag-name">Master</h4>
+      <h1 id="master-price" class="price-tag"><span class="dollar-sign">$ </span>399.99</h1>
+      <hr class="separator">
+      <h5 class="price-card-text">2 TB Storage</h5>
+      <hr class="separator">
+      <h5 class="price-card-text">10 Users Allowed</h5>
+      <hr class="separator">
+      <h5 class="price-card-text">Send up to 20 GB</h5>
+      <hr class="separator">
+      <button type="button" class="learn-more-button">LEARN MORE</button>
+    </div>
+
+  </div>
+
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    Coded by <a href="#">MKurtz666</a>.
+  </div>
+
+  <script src="javascript/index.js" type="text/javascript"></script>
+</body>
+
+</html>
