@@ -1,0 +1,136 @@
+body {
+  background-color: #0a0d0f;
+  height: 100%;
+  padding-top: 1.5em;
+  text-align: center;
+}
+
+h1 {
+  color: #e6ccff;
+  font-family: 'Niconne', cursive;
+  font-size: 5em;
+}
+
+.shadow {
+  background-color: #1f252d;
+  width: 100%;
+  height: 10%;
+  position: absolute;
+  top: 40%;
+}
+
+.keyboard {
+  background-image: linear-gradient(#222831, #1f252d);
+  border-radius: 8px;
+  border: 3px outset #393e46;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  margin: 0 auto 0 auto;
+  padding: 2.5% 0 0 0;
+  width: 80%;
+  position: relative;
+}
+
+.key-line {
+  border: 3px inset #393e46;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 50%;
+  margin: auto auto 0 auto;
+  position: relative;
+}
+
+.sound:hover {
+  cursor: pointer;
+}
+
+.white-key {
+  background-color: #eeeeee;
+  border: 2px outset grey;
+  border-radius: 2px 2px 6px 6px;
+  border-bottom: none;
+  height: 100%;
+  width: 5%;
+}
+
+.black-key {
+  background-image: linear-gradient(#313333, #0d0d0d);
+  border: 2px outset #333333;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  height: 70%;
+  width: 40%;
+  position: relative;
+  top: -1%;
+  left: +80%;
+}
+
+.black-key:hover {
+  cursor: pointer;
+}
+
+.pressed-white {
+  background-image: linear-gradient(#eeeeee, #737373);
+}
+
+.pressed-black {
+  background-image: linear-gradient(#0d0d0d, #313333);
+}
+
+.buttons-container {
+  margin: 0;
+  height: 35%;
+  width: 96%;
+  position: absolute;
+  top: 2%;
+}
+
+.tonation-toggle-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0 4px 0 4px;
+  height: 50%;
+  width: 20%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.tonation-toggle-element {
+  border-radius: 5px;
+  display: table;
+  margin: 0;
+  height: 75%;
+  width: 28%;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.tonation-toggle-element span {
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+}
+
+.tonation-toggle-button {
+  background-color: #222831;
+  border: 3px outset #393e46;
+  color: #737373;
+}
+
+.tonation-toggle-button:hover {
+  cursor: pointer;
+}
+
+.tonation-display {
+  background-color: black;
+  border: 3px inset #393e46;
+  color: #23dc3e;
+  font-family: "VT323", monospace;
+}
