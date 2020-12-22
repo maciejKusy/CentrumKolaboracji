@@ -1,78 +1,99 @@
+/**
+ * Boro Says game, based on the popular Simon Says game, developed by
+ * Maciej Kusy, December 2020. With each level the program will increment the
+ * combination of keys the player needs to re-create by one button. */
+
+
+/**
+ * Enclosing the code within a IIFE in order to keep the global namespace clean
+ */
 (function() {
 
-  //creating basic game variables:
-  var availableChoices = document.querySelectorAll("[data-key]");
+  /** Creating basic game variables */
+  const availableChoices = document.querySelectorAll("[data-key]");
 
-  var header = document.querySelector(".level-display");
+  const header = document.querySelector(".level-display");
 
-  var level = null;
+  let level = null;
 
-  var combination = null;
+  let combination = null;
 
-  var playerChoices = null;
+  let playerChoices = null;
 
-  var choiceCounter = 0;
+  let choiceCounter = 0;
 
-  //creating function adding random button to the combination:
-  function addToCombination() {
-    combination.push(availableChoices[Math.floor(Math.random() * availableChoices.length)].getAttribute("data-key"));
+  /** Adds random button to the combination end of the combination array */
+  const addToCombination = () => {
+    let randomIndex = Math.floor(Math.random() * availableChoices.length);
+
+    combination.push(availableChoices[randomIndex].getAttribute("data-key"));
   }
 
 
-  //creating function playing appropriate sound when button pressed
-  function playSound(key) {
-    var sound = new Audio("sounds/" + key + ".wav");
+  /** Plays relevant sound when a button is pressed
+   * @param {string} key - the key/button that was pressed
+   */
+  const playSound = key => {
+    let sound = new Audio("sounds/" + key + ".wav");
 
     sound.play();
   }
 
 
-  //creating function responsible for styling changes upon button press:
-  function buttonStyleChange(button) {
-    button.classList.add("pressed");
+  /** Creates an illusion of a 'blinking' style change for a selected object
+   * @param {Object} object - The DOM element that will 'blink'
+   * @param {string} className - The class to be applied for the duration of the blink
+   * @param {timeoutDuration} - the duration of the blink
+   */
+  const blinkingStyleChange = (object, className, timeoutDuration) => {
+    object.classList.add(className);
 
-    setTimeout(function() {button.classList.remove("pressed")}, 200);
+    setTimeout(function() {object.classList.remove(className)}, timeoutDuration);
   }
 
 
-  //creating function cleansing unnecessary event listeners:
-  function purgeEventListeners() {
+  /** Purges event listeners from previous 'level' */
+  const purgeEventListeners = () => {
     document.removeEventListener("mousedown", buttonClickedEvent);
     document.removeEventListener("keydown", keyPressedEvent);
   }
 
 
-  //creating function responsible for logic upon button being pressed:
-  function runButtonLogic(key, button) {
+  /** Handling logic upon button being pressed
+   * @param {string} key - the key that corresponds to the button that was clicked
+   * @param {Object} button - the button object that is the target of the event
+   */
+  const runButtonLogic = (key, button) => {
     playSound(key);
 
-    buttonStyleChange(button);
+    blinkingStyleChange(button, "pressed", 200);
 
     playerChoices.push(key);
 
-    choiceCounter += 1;
-
-    //creating condition for when the player's choice is not in line with the
-    //respective position in the combination:
-    if (playerChoices[choiceCounter - 1] != combination[choiceCounter - 1]) {
+    /** Setting condition for when the player's choice is not in line with the
+     * respective position in the combination */
+    if (playerChoices[choiceCounter] != combination[choiceCounter]) {
       purgeEventListeners();
 
-      //gameover logic goes here:
       return gameOver();
     }
-    //creating condition for when player made as many choices as there are
-    //possibilities in the combination and so advances a level:
+
+    choiceCounter += 1;
+
+    /** Setting condition for when player made as many choices as there are
+     * possibilities in the combination without an error and so advances a level
+     */
     if (choiceCounter == level) {
       purgeEventListeners();
 
-      //new level set up:
       setTimeout(setUpLevel, 700);
     }
   }
 
 
-  //creating function setting everything up for new game
-  function newGame() {
+  /** Setting up a new game bu re-setting the level and the combination,
+   * refreshing the header text and adding the first event listener */
+  const newGame = () => {
     level = 0;
 
     combination = [];
@@ -80,57 +101,68 @@
     header.textContent = "Press any key to continue";
 
     document.addEventListener("keydown", function() {
-      setUpLevel();
+      setTimeout(setUpLevel, 500);
     }, {once: true});
   }
 
 
-  //creating function responsible for game over event:
-  function gameOver() {
+  /** Setting up new game after game lost */
+  const restart = eventObject => {
+    if (eventObject.key == "Enter") {
+      document.removeEventListener("keydown", restart);
+
+      newGame();
+    }
+  }
+
+
+  /** Ending current game bu purging event listeners, giving the player a visual
+   * cue, updating the header text and setting up 'restart' event listener */
+  const gameOver = () => {
     purgeEventListeners();
 
-    var background = document.querySelector("body");
+    const background = document.querySelector("body");
 
-    background.classList.add("game-over");
-
-    setTimeout(function() {background.classList.remove("game-over"), 500});    
+    blinkingStyleChange(background, "game-over", 300);
 
     header.textContent = "Game over, press ENTER to restart";
 
-    document.addEventListener("keydown", function(event) {
-      if (event.key == "Enter") {
-        newGame();
-      }
-    });
+    document.addEventListener("keydown", restart);
   }
 
-  //creating function responsible for what happens when button is clicked
-  function buttonClickedEvent(eventObject) {
+
+  /** Handling 'mousedown' events
+   * @param {Object} eventObject - the 'mousedown' event that occurs
+   */
+  const buttonClickedEvent = eventObject => {
     if (eventObject.target.hasAttribute("data-key")) {
 
-      var buttonPressed = eventObject.target;
+      let buttonPressed = eventObject.target;
 
-      var keyPressed = eventObject.target.getAttribute("data-key");
+      let keyPressed = eventObject.target.getAttribute("data-key");
 
       runButtonLogic(keyPressed, buttonPressed);
     }
   }
 
 
-  //creating function responsible for what happens when key is pressed:
-  function keyPressedEvent(eventObject) {
-    var buttonPressed = document.querySelector(`[data-key="${eventObject.key}"]`)
+  /** Handling 'keydown' events
+   * @param {Object} eventObject - the 'keydown' event that occurs
+   */
+  const keyPressedEvent = eventObject => {
+    let buttonPressed = document.querySelector(`[data-key="${eventObject.key}"]`)
 
     if (buttonPressed) {
-      var keyPressed = buttonPressed.getAttribute("data-key");
+      let keyPressed = buttonPressed.getAttribute("data-key");
 
       runButtonLogic(keyPressed, buttonPressed);
     }
   }
 
 
-  //creating function for what needs to happen after first keypress is done:
-  function setUpLevel() {
+  /** Sets up new level after a combination was entered by the player correctly
+   */
+  const setUpLevel = () => {
     playerChoices = [];
 
     addToCombination();
@@ -139,13 +171,13 @@
 
     level += 1;
 
-    var lastElement = combination[combination.length - 1];
+    let lastElement = combination[combination.length - 1];
 
-    var lastElementButton = document.querySelector(`[data-key="${lastElement}"]`);
+    let lastElementButton = document.querySelector(`[data-key="${lastElement}"]`);
 
     playSound(lastElement);
 
-    buttonStyleChange(lastElementButton);
+    blinkingStyleChange(lastElementButton, "pressed", 200);
 
     header.textContent = "Level " + level;
 
