@@ -1,0 +1,282 @@
+body {
+  background-image: url("../img/backgr.jpg");
+  background-size: cover;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+  padding-top: 2.5vh;
+}
+
+h1 {
+  color: #0c2c47;
+  font-family: "Fredoka One", cursive;
+  font-size: 2.5rem;
+  letter-spacing: 0.5rem;
+  text-shadow: 4px 4px 7.5px #1e2b1d;
+}
+
+.main-container {
+  background-color: #6d6d6d;
+  border: 0.16rem outset #9b9b9b;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-shadow: 5px 5px 14px #1e2b1d;
+          box-shadow: 5px 5px 14px #1e2b1d;
+  margin-top: 1.25rem;
+}
+
+.top-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #6d6d6d;
+  padding: 5px;
+  width: 95%;
+}
+
+.display {
+  background-color: #0d0d0d;
+  border: 3px inset #9b9b9b;
+  color: #b30000;
+  font-family: "Major Mono Display", monospace;
+  font-size: 2.25rem;
+  height: 3rem;
+  letter-spacing: -0.7rem;
+  padding: 0.5rem;
+  text-align: center;
+  width: 5rem;
+}
+
+.new-game-button {
+  background-color: #6d6d6d;
+  border: 0.16rem outset #9b9b9b;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 70% 80%;
+  background-image: url("../img/default.png");
+  background-size: 90% 90%;
+  border-width: 0.3rem;
+  cursor: pointer;
+  display: block;
+  height: 3rem;
+  width: 3rem;
+}
+
+.new-game-button:active {
+  border-style: inset;
+}
+
+.new-game-button-tense {
+  background-image: url("../img/tense.png");
+}
+
+.new-game-button-lost {
+  background-image: url("../img/loser.png");
+}
+
+.new-game-button-won {
+  background-image: url("../img/victor.png");
+}
+
+.difficulty-button {
+  background-color: #6d6d6d;
+  border: 0.16rem outset #9b9b9b;
+  border-width: 0.3rem;
+  cursor: pointer;
+  color: #0c2c47;
+  display: block;
+  -webkit-box-flex: 1;
+      -ms-flex: auto;
+          flex: auto;
+  font-family: "Press Start 2P", arial;
+  font-size: 0.7rem;
+  height: 3rem;
+  text-align: center;
+  -webkit-transition: color 0.5s ease-out;
+  transition: color 0.5s ease-out;
+  width: 5rem;
+}
+
+.difficulty-button:active {
+  border-style: inset;
+}
+
+.difficulty-button:hover {
+  color: #bbbfca;
+}
+
+.tile-container {
+  background-color: #6d6d6d;
+  border: 0.16rem outset #9b9b9b;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  max-width: 60vw;
+}
+
+.tile-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.tile-unclicked {
+  background-color: #6d6d6d;
+  border: 0.16rem outset #9b9b9b;
+  font-family: "Press Start 2P", arial;
+  height: 1.25rem;
+  line-height: 1.25rem;
+  text-align: center;
+  -webkit-transition: background-color 0.25s ease-out;
+  transition: background-color 0.25s ease-out;
+  width: 1.25rem;
+}
+
+.tile-unclicked span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+.tile-unclicked:hover {
+  background-color: #9b9b9b;
+}
+
+.tile-clicked {
+  background-color: #b9b9b9;
+  border-style: inset;
+  border-color: #b9b9b9;
+}
+
+.tile-clicked-mime {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 70% 80%;
+  background-image: url("../img/mime_face.png");
+  background-color: #b30000;
+}
+
+.tile-flagged {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 70% 80%;
+  background-image: url("../img/red_flag.png");
+}
+
+.one {
+  color: #3399ff;
+}
+
+.two {
+  color: #006600;
+}
+
+.three {
+  color: #ff0000;
+}
+
+.four {
+  color: #660033;
+}
+
+.five-plus {
+  color: #4d004d;
+}
+
+.game-won-overlay {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(17, 18, 31, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.game-won-overlay-closed {
+  display: none;
+}
+
+.game-won-popup {
+  background-color: #6d6d6d;
+  border: 0.16rem outset #9b9b9b;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 30vh;
+  width: 40vw;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  padding-top: 1rem;
+}
+
+.game-won-popup span {
+  color: #0c2c47;
+  font-family: "Press Start 2P", arial;
+}
+
+.game-won-popup button {
+  -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+}
+
+.game-won-popup #final-time {
+  font-size: 2rem;
+}
+/*# sourceMappingURL=styles.css.map */
