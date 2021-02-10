@@ -2,7 +2,7 @@
 $backgroundImage: "../img/backgr.jpg";
 $mainFont: 'Fredoka One', cursive;
 $mainFontColor: #0c2c47;
-$shadowColor: rgb(30, 43, 29);
+$shadowColor: #1e2b1d;
 $gameWonOverlayColor: rgba(17, 18, 31, 0.7);
 
 // Tile and container variables:
@@ -81,9 +81,8 @@ h1 {
     margin-top: 1.25rem;
 }
 
-.top-container {
+.main-container__top {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     background-color: $tileColor;
@@ -91,7 +90,7 @@ h1 {
     width: 95%;
 }
 
-.display {
+.main-container__top__display {
     background-color: $appBlack;
     border: 3px inset $tileBorderColor;
     color: $mimeBackgroundColor;
@@ -104,7 +103,7 @@ h1 {
     width: 5rem;
 }
 
-.new-game-button {
+.main-container__top__new-game-button {
     @include main-theme;
     @include image-center;
     background-image: url($newGameButtonPicDefault);
@@ -113,26 +112,22 @@ h1 {
     cursor: pointer;
     display: block;
     height: $newGameButtonHeight;
-    width: $newGameButtonWidth
+    width: $newGameButtonWidth;    
+    &:active {
+        border-style: inset;
+    }
+    &-tense {
+        background-image: url($newGameButtonPicTense);
+    }
+    &-lost {
+        background-image: url($newGameButtonPicLost);
+    }
+    &-won {
+        background-image: url($newGameButtonPicWon);
+    }
 }
 
-.new-game-button:active {
-    border-style: inset;
-}
-
-.new-game-button-tense {
-    background-image: url($newGameButtonPicTense);
-}
-
-.new-game-button-lost {
-    background-image: url($newGameButtonPicLost);
-}
-
-.new-game-button-won {
-    background-image: url($newGameButtonPicWon);
-}
-
-.difficulty-button {
+.main-container__top__difficulty-button {
     @include main-theme;
     border-width: 0.3rem;
     cursor: pointer;
@@ -145,81 +140,75 @@ h1 {
     text-align: center;
     transition: color 0.5s ease-out;
     width: $difficultyButtonWidth;
+    &:active {
+        border-style: inset;
+    }
+    &:hover {
+        color: $buttonFontHighlightColor;
+    }
 }
 
-.difficulty-button:active {
-    border-style: inset;
-}
-
-.difficulty-button:hover {
-    color: $buttonFontHighlightColor;
-}
-
-.tile-container {
+.main-container__tile-container {
     @include main-theme;
     @include inline-flex-column;
     max-width: 60vw;
 }
 
-.tile-row {
+.main-container__tile-container__tile-row {
     display: flex;
     align-items: center;
     flex-direction: row;
 }
 
-.tile-unclicked {
+.main-container__tile-container__tile-row__tile--unclicked {
     @include main-theme;
     font-family: $tileFont;
     height: 1.25rem;
-    line-height: 1.25rem;
     text-align: center;
     transition: background-color 0.25s ease-out;
-    width: 1.25rem; 
-    span {
-        display: inline-block;
-        vertical-align: middle;
-        line-height: normal;
-      }
+    width: 1.25rem;
+    line-height: 1.25;
+    padding-top: 0.1rem; 
+    padding-left: 0.1rem;     
+    &:hover{
+        background-color: $tileBorderColor;
+    }
 }
 
-.tile-unclicked:hover {
-    background-color: $tileBorderColor;
-}
-
-.tile-clicked {
+.main-container__tile-container__tile-row__tile--clicked {
     background-color: $tileClickedColor;
     border-style: inset;
     border-color: $tileClickedColor;
 }
 
-.tile-clicked-mime {
+.main-container__tile-container__tile-row__tile--clicked--mime {
     @include image-center;
     background-image: url($mimeImage);
     background-color: $mimeBackgroundColor;
 }
 
-.tile-flagged {
+.main-container__tile-container__tile-row__tile--flagged {
     @include image-center;
     background-image: url($flagImage);    
 }
 
-.one {
+.main-container__tile-container__tile-row__tile--one {
     color: $fontColorOne;
 }
 
-.two {
+.main-container__tile-container__tile-row__tile--two {
     color: $fontColorTwo;
 }
 
-.three {
+.main-container__tile-container__tile-row__tile--three {
     color: $fontColorThree;
 }
 
-.four {
+.main-container__tile-container__tile-row__tile--four {
     color: $fontColorFour;
 }
 
-.five-plus {
+.main-container__tile-container__tile-row__tile--five-plus {
     color: $fontColorFivePlus
 }
 
@@ -233,13 +222,12 @@ h1 {
     left: 0;
     align-items: center;
     justify-content: center;
+    &-closed {
+        display: none;
+    }
 }
 
-.game-won-overlay-closed {
-    display: none;
-}
-
-.game-won-popup {
+.game-won-overlay__game-won-popup {
     @include main-theme;
     display: flex;
     height: 30vh;
@@ -254,8 +242,9 @@ h1 {
     }
     button {
         flex-grow:0;
-    }
-    #final-time {
-        font-size: 2rem;
-    }
+    }    
+}
+
+.game-won-overlay__game-won-popup__final-time {
+    font-size: 2rem;
 }
