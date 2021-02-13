@@ -59,7 +59,7 @@ class ConsoleView {
                     this.handleExit();
                 }
             }
-        } catch(err) {
+        } catch(error) {
             console.error(error);
         }
     }
@@ -71,7 +71,7 @@ class ConsoleView {
             ]);
             this.onLearn && this.onLearn(sign)
             await this.initView()
-        } catch (err) {
+        } catch (error) {
             console.error(error)
         }
     }
@@ -83,7 +83,7 @@ class ConsoleView {
             ])
             this.onPlay && this.onPlay(sign)
             await this.initView()
-        } catch (err) {
+        } catch (error) {
             console.error(error)
         }
     }
