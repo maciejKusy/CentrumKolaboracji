@@ -12,11 +12,11 @@ class ConsoleView {
     }
 
     addChoiceHandler(onChoice) {
-        this.onPlay = onChoice
+        this.onPlay = onChoice;
     }
 
     addLearnHandler(onLEarn) {
-        this.onLearn = onLEarn
+        this.onLearn = onLEarn;
     }
 
     displayResult(stHand, ndHand, status) {
