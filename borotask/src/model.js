@@ -2,7 +2,7 @@ import {Sign, Status} from './consts.js';
 
 class Model {
     getSigns = () => {
-        return [Sign.ROCK, Sign.SCISSORS, Sign.PAPER];
+        return [Sign.ROCK, Sign.SCISSORS, Sign.PAPER, Sign.LIZARD, Sign.SPOCK];
     }
 
     descSign = sign => {
@@ -10,19 +10,41 @@ class Model {
             case Sign.ROCK: {
                 return {
                     [Sign.SCISSORS]: Status.WIN,
-                    [Sign.PAPER]: Status.LOSE
+                    [Sign.PAPER]: Status.LOSE,
+                    [Sign.LIZARD]: Status.WIN,
+                    [Sign.SPOCK]: Status.LOSE
                 }
             }
             case Sign.PAPER: {
                 return {
                     [Sign.ROCK]: Status.WIN,
                     [Sign.SCISSORS]: Status.LOSE,
+                    [Sign.LIZARD]: Status.LOSE,
+                    [Sign.SPOCK]: Status.WIN
                 }
             }
             case Sign.SCISSORS: {
                 return {
                     [Sign.PAPER]: Status.WIN,
                     [Sign.ROCK]: Status.LOSE,
+                    [Sign.LIZARD]: Status.WIN,
+                    [Sign.SPOCK]: Status.LOSE
+                }
+            }
+            case Sign.SPOCK: {
+                return {
+                    [Sign.PAPER]: Status.LOSE,
+                    [Sign.ROCK]: Status.WIN,
+                    [Sign.LIZARD]: Status.LOSE,
+                    [Sign.SCISSORS]: Status.WIN
+                }
+            }
+            case Sign.LIZARD: {
+                return {
+                    [Sign.PAPER]: Status.WIN,
+                    [Sign.ROCK]: Status.LOSE,
+                    [Sign.SPOCK]: Status.WIN,
+                    [Sign.SCISSORS]: Status.LOSE
                 }
             }
         }
