@@ -80,3 +80,17 @@ mozesz w ramach dodatkowego cwiczenia dodac do package.json skrypt ktory to odpa
 ctrl+c
 ```
 w razie pytan pisz :P nie jest to napisane jakos specjalnie dobrze, le nie o to chodzi :D bledy w angielskim tez zignoruj :D
+
+## BONUS
+
+Dodaj jaszczurke i Spocka wg https://en.wikipedia.org/wiki/Rock_paper_scissors -> variations
+
+## Task 3
+Dodalem pliki:
+- index.html,
+- src/script.js - jak main.js, spina wszystko tylko uzywa innego controllera,
+- src/browserView.js - controller widoku pod przegladarke
+
+Zadanie: napisz podstawowy widok przegladarkowy, modyfikujac wylacznie `index.html` i `src/browserView.js`, jak dla mnie nie musi byc ostylowane itd. chodzi tylko o to zeby w jakis sposob dzialalo, wyswietlilo byttony i np. gra moze byc po kliknieciu lewym, a learn prawym przyciskiem myszy, z jakims opisem, etc.
+
+przegladarka moze krzyczec lokalnie ze nie pusci tych skryptow, wymaga to zmiany w configu chroma albo puszczenia tego z lokalnego serwera (np. vscode extension live server to ogarnia)
