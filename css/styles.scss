@@ -1,0 +1,160 @@
+@font-face {
+    font-family: "Main";
+    src: url("../fonts/Minercraftory.ttf");
+}
+
+@keyframes score-display {
+    0% {bottom: 14rem; left: 37rem;}
+    100% {bottom: 17rem; left: 39rem;}
+}
+
+@keyframes level-up-display {
+    0% {bottom: 10rem; left: 37rem;}
+    100% {bottom: 12rem; left: 39rem;}
+}
+
+$bodyBackgroundColor: rgb(180, 175, 175);
+$bodyBackgroundImage: url("../img/background.png");
+$backgroundShadowColor: rgb(23, 31, 21);
+$mainContainerColor: rgb(94, 116, 88);
+$mainContainerBorderColor: rgb(116, 116, 116);
+$gameWonOverlayColor: rgba(39, 39, 39, 0.8);
+$occupiedTilecolor: rgb(50, 61, 48);
+$occupiedTileBorderColor: rgb(63, 80, 65);
+$mainFont: "Main";
+$mainFontColor: rgb(178, 176, 202);
+$mainFontShadowColor: rgb(0, 0, 0);
+$scoreAnimationColor: rgb(0, 119, 216);
+$levelUpAnimationColor: rgb(255, 153, 0);
+
+@mixin mainFontStyling {
+    color: $mainFontColor;
+    font-family: $mainFont;
+    font-size: 2rem;
+    text-shadow: 3px 3px 5px $mainFontShadowColor;
+}
+
+@mixin mainContainerBorder {
+    border: 10px inset $mainContainerBorderColor;
+}
+
+body {
+    background-size: cover;
+    background-color: $bodyBackgroundColor;
+    background-image: $bodyBackgroundImage;
+    background-size: contain;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+    padding-top: 2vh;
+}
+
+.main-container {
+    @include mainContainerBorder;
+    align-items: center;
+    background-color: $mainContainerColor;
+    border-radius: 8px;
+    display: inline-flex;
+    flex-direction: column;
+    margin-top: 1.25rem;
+}
+
+.side-container {
+    @include mainFontStyling;
+    align-items: center;
+    background-color: $mainContainerColor;
+    border-radius: 8px;
+    box-shadow: 5px 5px 14px $backgroundShadowColor;
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    margin-top: 1.25rem;
+    width: 25vw;
+    &__shape-display {
+        max-height: 5rem;
+        max-width: 10rem;
+    }
+}
+
+.main-container__tilerow {
+    align-items: center;
+    display: flex;
+}
+
+.main-container__tile {
+    border: 4px solid $mainContainerColor;
+    height: 1.5rem;
+    width: 1.5rem;
+    &--hidden {
+        display: none;
+    }
+    &--occupied {
+        background-color: $occupiedTilecolor;
+        border: 4px outset $occupiedTileBorderColor;
+        border-radius: 5px;
+    }
+}
+
+.gameover-overlay {
+    align-items: center;
+    background-color: $gameWonOverlayColor;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    &--closed {
+        display: none;
+    }
+}
+
+.gameover-popup {
+    display: flex;
+    height: 50vh;
+    width: 40vw;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding-top: 1rem;
+    span {
+        @include mainFontStyling;
+    }
+    button {
+        @include mainFontStyling;
+        @include mainContainerBorder;
+        background-color: $mainContainerColor;
+        border-radius: 50%;
+        box-shadow: 5px 5px 14px $backgroundShadowColor;
+        display: block;
+        margin-top: 5rem;
+        height: 12rem;
+        width: 12rem;
+        transition: all 0.5s;
+        &:hover {
+            background-color: $occupiedTilecolor;
+            cursor: pointer;
+            margin-top: 4rem;
+            height: 13rem;
+            width: 13rem;
+            transition: all 0.5s;
+        }
+    }
+}
+
+.row-points {
+    position: absolute;
+    font-family: $mainFont;
+    font-size: 3rem;
+    color: $scoreAnimationColor;
+}
+
+.level-up {
+    position: absolute;
+    font-family: $mainFont;
+    font-size: 4rem;
+    color:$levelUpAnimationColor;
+
+}
